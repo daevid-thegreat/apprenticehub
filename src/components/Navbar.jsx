@@ -21,7 +21,7 @@ const Navbar = () => {
         </Link>
         <Link
           className=" ml-24 font-medium text-primary font-Poppins rounded-2xl  bg-white hover:text-white hover:bg-secondary px-8 py-4 text-lg"
-          href="/register"
+          href="/register-apprentice"
         >
           Get Started
         </Link>

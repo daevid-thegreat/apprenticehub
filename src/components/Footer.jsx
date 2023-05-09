@@ -28,6 +28,7 @@ const Footer = () => {
         <div className="flex flex-col self-start mt-16 leading-10">
           <Link href="/about">About</Link>
           <Link href="/about">Contact</Link>
+          <Link href="/about">Help and Support</Link>
           <Link href="/about">Terms of Use</Link>
           <Link href="/about">Privacy Policy</Link>
         </div>
