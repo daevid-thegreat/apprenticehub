@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import {BsFillArrowRightCircleFill} from 'react-icons/Bs'
+import {BsFillArrowRightCircleFill} from 'react-icons/bs'
 
 const Hero = () => {
   return (
