@@ -5,7 +5,7 @@ import Subform from "./Subform";
 const Footer = () => {
   return (
     <div className="py-6 bg-primary text-white">
-      <div className="flex justify-around">
+      <div className="grid grid-cols-4 px-32 md:grid-cols-1 md:px-10">
         <div className="flex flex-col self-start">
           <div className="logo">
             <Link href="/">

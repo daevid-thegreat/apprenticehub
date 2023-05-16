@@ -10,3 +10,17 @@
   position: relative;
 z-index: 900;
 }
+
+.mobile-nav{
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav{
+    display: none;
+  }
+
+  .mobile-nav{
+    display: flex;
+  }
+}

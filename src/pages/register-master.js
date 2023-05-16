@@ -1,30 +1,55 @@
-import React from 'react'
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
-
-
-
-
+import {useRouter} from "next/router";
 
 const register_apprentice = () => {
 
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = (e) => {
     e.preventDefault();
-
     setShowPassword(!showPassword);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch('https://apprenticehubapi.onrender.com/auth/signup-master/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (res.ok){
+      await router.push({
+            pathname: '/submit-otp',
+            query: { email: email },
+          }, '/submit-opt', {},
+      )
+    }else{
+      const errorResponse = await res.json();
+      const errorMessage = errorResponse.message;
+
+      setError(errorMessage)
+    }
+
   };
 
 
 
   return (
-    <div className='grid grid-cols-2'>
-      <div className="bg-[url('/auth_image.png')] bg-cover h-screen">
-        <div className="logo">
+    <div className='grid grid-cols-2 md:grid-cols-1'>
+      <div className="bg-[url('/auth_image.png')] bg-cover h-screen md:hidden">
+        <div className="logo my-6 mx-4">
           <Link href="/">
             <Image src="/logo-1.png" width={385} height={59.52} />
           </Link>
@@ -37,11 +62,19 @@ const register_apprentice = () => {
       </div>
       <div className='font-Poppins'>
         <div className='text-center mt-8 mb-14'>
+          <div className="logo my-8 mx-10 hidden md:flex">
+            <Link href="/">
+              <Image src="/logo-1.png" width={225} height={59.52} />
+            </Link>
+          </div>
           <h2 className='text-4xl font-bold my-3'>Join as a Skill Master </h2>
           <p className='text-lg text-gray'>Please enter your details to create a new account</p>
         </div>
+        <div className="text-center text-[#EF5D5D] font-semibold text-lg">
+          {error && <p>{error}</p>}
+        </div>
         <div className='flex items-center justify-center'>
-          <form className='w-1/2'>
+          <form onSubmit={submitHandler} className='w-1/2 md:w-full md:mx-8'>
             <div className="mb-6">
               <label
                 className="block text-start text-[#000] font-semibold text-sm my-1"
@@ -54,6 +87,7 @@ const register_apprentice = () => {
                 id="fullname"
                 type="text"
                 placeholder="First and Last Name"
+                onChange={e => setName(e.target.value)}
               />
             </div>
             <div>
@@ -70,8 +104,8 @@ const register_apprentice = () => {
                   id="fullname"
                   type="text"
                   placeholder="Enter your mail"
+                  onChange={e => setEmail(e.target.value)}
                 />
-                <p className='text-sm font-semibold text-primary text-end my-2 cursor-pointer'><Link href='/register-apprentice-tel'>Use Phone Instead</Link></p>
               </div>
 
             </div>
@@ -90,9 +124,10 @@ const register_apprentice = () => {
                   id="fullname"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter a new password"
+                  onChange={e => setPassword(e.target.value)}
                 />
                 <div
-                  className="-mx-8 mt-2 text-center cursor-pointer"
+                  className="-mx-8 mt-3 text-center cursor-pointer"
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
@@ -113,7 +148,7 @@ const register_apprentice = () => {
               <p className='text-center my-3 text-gray'>Already have an account? <Link className='text-primary font-semibold' href='/login-master'>Login</Link></p>
             </div>
             <div className='my-4'>
-              <p className='text-center my-3 text-gray'>Not a Skil Master? <Link className='text-[#EF5D5D] font-semibold' href='/register-apprentice'>Sign Up as an apprentice</Link></p>
+              <p className='text-center my-3 text-gray'>Not a Skill Master? <Link className='text-[#EF5D5D] font-semibold' href='/register-apprentice'>Sign Up as an apprentice</Link></p>
             </div>
 
           </form>

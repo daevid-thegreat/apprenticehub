@@ -44,11 +44,11 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="flex justify-center align-items-center px-32 my-28">
-      <div className='w-1/2'>
+    <div className="grid grid-cols-2 md:grid-cols-1 justify-center align-items-center px-32 md:px-6 md:my-8 my-28">
+      <div className=''>
         <Image src="/flat.png" alt="" width={533} height={523}  />
       </div>
-      <div className='align-items-center w-1/2'>
+      <div className='align-items-center'>
         <div className='font-Poppins font-bold text-primary text-2xl self-start my-14'>Frequently Asked Questions</div>
         <div>
         {accordionData.map((item, index) => {

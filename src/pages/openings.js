@@ -45,13 +45,11 @@ const openings = () => {
           </div>
         </div>
         <div>
-          <div className="flex justify-center space-x-8 my-14">
-            <button className="">
+          <div className="flex justify-center md:grid-cols-3 space-x-8 my-14">
               <div className=" flex border border-1 border-gray rounded-[8px]">
                 <IoLocationOutline width={30} height={30} fill='gray' className="h-10 mx-2" />
                 <input type="text" placeholder="Location" className="border-none bg-white h-10 px-2 text-md focus:outline-none w-11/12" />
               </div>
-            </button>
             <button className="h-10 mx-2"><CustomSelect placeholder={'Type'} options={type} /></button>
             <button className="h-10 mx-2"><CustomSelect placeholder={'Industry'} options={industry} /></button>
             <div className="flex items-center h-10 mx-2">
@@ -71,7 +69,7 @@ const openings = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="columns-3 space-y-6">
+        <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
           <Job openingid={'rdctfvygbuhn'} />
           <Job openingid={'rdctfvfygbuhn'}/>
           <Job openingid={'rdctfvyhgbuhn'}/>
