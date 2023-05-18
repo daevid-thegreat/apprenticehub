@@ -4,7 +4,7 @@ const courses = () => {
   return (
     <div>
         <Navbar/>
-        courses
+        courses coming soon...
         </div>
   )
 }

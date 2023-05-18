@@ -5,7 +5,7 @@ import { Note, Briefcase, TagUser, User, InfoCircle, LogoutCurve } from 'iconsax
 
 const Sidebar = () => {
     return (
-        <aside className='w-1/5 px-6 pb-8 space-y-10 bg-white h-screen sticky left-0 top-0 flex flex-col justify-between'>
+        <aside className='w-1/5 px-6 pb-8 space-y-10 bg-white h-screen sticky left-0 top-0 flex flex-col justify-between md:hidden'>
             <div>
             <div className='mb-16 mt-6'>
                 <Image src="/logo.png" alt="logo" width={305} height={89.52} />

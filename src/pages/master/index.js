@@ -44,15 +44,15 @@ const profile = () => {
   return (
       <div className='flex bg-[#DAE1FF] h-full w-full'>
         <Sidebar />
-        <main className='px-4 w-5/6'>
+        <main className='px-4 w-5/6 md:w-full'>
           <div className="my-6 items-center grid grid-cols-7 px-4">
-            <input type="text" placeholder="Search" className="w-full h-14 px-4 text-sm rounded-lg col-span-6 focus:outline-primary" />
-            <Link className='bg-[#5271FF] text-white px-4 py-4 rounded-md ml-10 col-span-1' href='/master/add'>
+            <input type="text" placeholder="Search" className="w-full h-14 px-4 text-sm rounded-lg col-span-6 md:col-span-5 focus:outline-primary" />
+            <Link className='bg-[#5271FF] whitespace-nowrap text-white px-4 py-4 rounded-md ml-10 md:ml-6 col-span-1 md:col-span-2' href='/master/add'>
               Add New
             </Link>
           </div>
 
-          <div className='grid grid-cols-6 px-4 space-x-8'>
+          <div className='grid grid-cols-6 px-4 space-x-8 md:grid-cols-1 md:space-x-0 md:space-y-4 md:px-2'>
             <div className='col-span-3 flex flex-col bg-white px-4 py-2 rounded-lg'>
               <div className='flex justify-between items-center mb-8 mt-4'>
               <span className='text-3xl font-bold text-[#0A1E40]'>
