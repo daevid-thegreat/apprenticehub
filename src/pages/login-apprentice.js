@@ -5,8 +5,8 @@ import {useRouter} from "next/router";
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 
 const register_apprentice = () => {
-    const router = useRouter();
 
+    const router = useRouter();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState('');

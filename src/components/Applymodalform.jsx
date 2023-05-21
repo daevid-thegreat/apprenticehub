@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function Applymodalform() {
+
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

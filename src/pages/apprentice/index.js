@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, TabIndicator } from '@chakra-ui/react'
 import AppNav from "@/components/AppNav";
+import PasswordModal from "@/components/PasswordModal";
 
 
 const profile = () => {
@@ -94,10 +95,10 @@ const profile = () => {
                                     </div>
 
                                     <div className='my-8'>
-                                        <button className='bg-[#EF5D5D] text-white px-4 py-2 rounded-md'>
-                                            Change Password
-                                        </button>
-                                    </div>
+                                    <div className='text-center my-8 modal'>
+                                        <PasswordModal master={master} email={email} />
+                                  </div>
+                                  </div>
 
 
 

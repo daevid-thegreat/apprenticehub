@@ -2,8 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Note, Briefcase, TagUser, User, InfoCircle, LogoutCurve } from 'iconsax-react';
+import {useRouter} from "next/router";
+
 
 const Sidebar = () => {
+    const router = useRouter();
+
     return (
         <aside className='w-1/5 px-6 pb-8 space-y-10 bg-white h-screen sticky left-0 top-0 flex flex-col justify-between md:hidden'>
             <div>

@@ -3,6 +3,8 @@ import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
 import Image from 'next/image'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
+import PasswordModal from "@/components/PasswordModal";
+
 
 const profile = () => {
   const [name, setName] = useState("")
@@ -27,6 +29,7 @@ const profile = () => {
           const { name, email } = data.data.user; // Extract name and email from the response
           setName(name); // Update the name state
           setEmail(email); // Update the email state
+          setMaster(data.data.user.is_master)
         } else {
           const errorResponse = await res.json();
           const errorMessage = errorResponse.message;
@@ -80,9 +83,9 @@ const profile = () => {
               </div>
 
               <div className='my-8'>
-                <button className='bg-[#EF5D5D] text-white px-4 py-2 rounded-md'>
-                  Change Password
-                </button>
+                <div className='text-center my-8 modal'>
+                    <PasswordModal master={master} email={email} />
+              </div>
               </div>
 
 
