@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import Sidebar from '@/components/Sidebar'
-import Link from 'next/link'
-import Image from 'next/image'
-import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, TabIndicator } from '@chakra-ui/react'
 import AppNav from "@/components/AppNav";
 import PasswordModal from "@/components/PasswordModal";
+import EditModal from "@/components/EditModal";
 
 
 const profile = () => {
     const [name, setName] = useState("")
     const [master, setMaster] = useState("")
     const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -31,6 +29,7 @@ const profile = () => {
                     const { name, email } = data.data.user; // Extract name and email from the response
                     setName(name); // Update the name state
                     setEmail(email); // Update the email state
+                    setPhone(data.data.tel)
                 } else {
                     const errorResponse = await res.json();
                     const errorMessage = errorResponse.message;
@@ -74,9 +73,7 @@ const profile = () => {
                                         {name}
                                       </span>
 
-                                        <button className='bg-[#5271FF] text-white px-4 py-2 rounded-md'>
-                                            Edit
-                                        </button>
+                                            <EditModal fullname={name} phone={phone}  />
 
                                     </div>
 
@@ -89,15 +86,14 @@ const profile = () => {
                                         </div>
                                         <div className='flex items-center'>
                                             <span className='mr-7 text-[#000000] font-semibold'>Tel : </span>
-                                            <span className='text-md font-medium text-[#747474] underline'>+2348123456789</span>
+                                            <span className='text-md font-medium text-[#747474] underline'>{phone}</span>
 
                                         </div>
                                     </div>
 
                                     <div className='my-8'>
-                                    <div className='text-center my-8 modal'>
                                         <PasswordModal master={master} email={email} />
-                                  </div>
+
                                   </div>
 
 
@@ -109,7 +105,7 @@ const profile = () => {
                             <p>my applicsconurojv oirkmvitmvmmrtv!</p>
                         </TabPanel>
                         <TabPanel>
-                            <p>my coursedje j je j j j ifj i f vi if k jf !</p>
+                            <p>coming soon...</p>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

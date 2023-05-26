@@ -10,6 +10,7 @@ import AddRequire from '@/components/AddRequire';
 import TodoList from '@/components/Requirements';
 
 
+
 const createOpening = () => {
 
     const [inputText, setInputText] = useState("")
@@ -19,7 +20,7 @@ const createOpening = () => {
     return (
         <div className='flex bg-[#DAE1FF] h-full w-full'>
             <Sidebar />
-            <main className='px-40 mx-28 w-5/6 my-2 items-center'>
+            <main className='px-32 mx-20 w-5/6 my-2 items-center'>
                 <div className='text-center text-[#1D2234] text-lg font-semibold my-8'>Create A Job Opening</div>
 
                 <form>
@@ -28,7 +29,7 @@ const createOpening = () => {
                         <input type="text" name="headline" id="headline" className='py-3 rounded-lg focus:outline-primary' />
                     </div>
 
-                    <div className='flex items-center my-4'>
+                    <div className='grid grid-cols-3 space-x-8 my-4'>
                         <div className='flex flex-col'>
                             <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Pay</label>
                             <div className='flex items-center'>
@@ -38,26 +39,21 @@ const createOpening = () => {
 
                         </div>
 
-                        
-                        <SimpleGrid gap={50} p={24} columns={3} className='mt-2'>
-                            <Select icon={<MdArrowDropDown />} variant="outline" placeholder="Job type" className='py-3 px-3 rounded-lg mt-5'>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </Select>
+                        <div className='flex flex-col'>
+                            <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Job-Type</label>
+                            <div className='flex items-center'>
+                                <input type="text" name="headline" id="headline" className='py-3 rounded-tr-lg rounded-br-lg focus:outline-primary' />
+                            </div>
 
-                            <Select icon={<MdArrowDropDown />} variant="outline" placeholder="Level" className='py-3 px-3 rounded-lg mt-5'>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </Select>
+                        </div>
 
-                            <Select icon={<MdArrowDropDown />} variant="outline" placeholder="Industry" className='py-3 px-3 rounded-lg mt-5'>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </Select>
-                            </SimpleGrid>
+                        <div className='flex flex-col'>
+                            <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Experience Level</label>
+                            <div className='flex items-center'>
+                                <input type="text" name="headline" id="headline" className='py-3 rounded-tr-lg rounded-br-lg focus:outline-primary' />
+                            </div>
+
+                        </div>
                     
                     </div>
 

@@ -78,7 +78,7 @@ function PasswordModal(email, master) {
           onClick={handleClickOutside}
         >
           <div className="bg-[#BBC8FF] w-4/12 md:w-full p-6 rounded-lg ">
-            <h2 className="text-2xl font-bold mb-8 text-[#EF5D5D]">Change Password</h2>
+            <h2 className=" text-2xl font-bold mb-8 text-[#EF5D5D]">Change Password</h2>
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col space-x-4 justify-between">
 

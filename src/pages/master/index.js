@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
-import Image from 'next/image'
-import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
 import PasswordModal from "@/components/PasswordModal";
+import EditModal from "@/components/EditModal";
+import Company from "@/components/Company";
 
 
 const profile = () => {
   const [name, setName] = useState("")
   const [master, setMaster] = useState("")
   const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -30,6 +31,7 @@ const profile = () => {
           setName(name); // Update the name state
           setEmail(email); // Update the email state
           setMaster(data.data.user.is_master)
+          setPhone(data.data.tel)
         } else {
           const errorResponse = await res.json();
           const errorMessage = errorResponse.message;
@@ -50,7 +52,7 @@ const profile = () => {
         <main className='px-4 w-5/6 md:w-full'>
           <div className="my-6 items-center grid grid-cols-7 px-4">
             <input type="text" placeholder="Search" className="w-full h-14 px-4 text-sm rounded-lg col-span-6 md:col-span-5 focus:outline-primary" />
-            <Link className='bg-[#5271FF] whitespace-nowrap text-white px-4 py-4 rounded-md ml-10 md:ml-6 col-span-1 md:col-span-2' href='/master/add'>
+            <Link className='bg-[#5271FF] whitespace-nowrap text-white px-4 py-4 rounded-md ml-10 md:ml-6 col-span-1 md:col-span-2' href='/master/myopenings/create-opening'>
               Add New
             </Link>
           </div>
@@ -62,9 +64,7 @@ const profile = () => {
                 {name}
               </span>
 
-                <button className='bg-[#5271FF] text-white px-4 py-2 rounded-md'>
-                  Edit
-                </button>
+                <EditModal fullname={name} phone={phone}  />
 
               </div>
 
@@ -77,62 +77,21 @@ const profile = () => {
                 </div>
                 <div className='flex items-center'>
                   <span className='mr-7 text-[#000000] font-semibold'>Tel : </span>
-                  <span className='text-md font-medium text-[#747474] underline'>+2348123456789</span>
+                  <span className='text-md font-medium text-[#747474] underline'>{phone}</span>
 
                 </div>
               </div>
 
-              <div className='my-8'>
-                <div className='text-center my-8 modal'>
-                    <PasswordModal master={master} email={email} />
-              </div>
-              </div>
+                            <div className='my-8'>
+                                        <PasswordModal master={master} email={email} />
+
+                                  </div>
 
 
 
             </div>
 
-            <div className='col-span-3 flex flex-col bg-white px-4 py-4 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <span className='text-sm font-bold text-primary'>Company</span>
-
-
-                <button className='bg-[#5271FF] text-white px-4 py-2 rounded-md'>
-                  Edit
-                </button>
-              </div>
-
-              <div>
-                <div>
-                  <div className='flex items-center my-3'>
-                    <div className='border-4 border-primary  rounded-lg'>
-                      <Image src='/m-logo.png' width={100} height={100} />
-                    </div>
-                    <span className='text-xl font-semibold ml-3'>McPops</span>
-                  </div>
-                  <div>
-                    <div className='space-x-3 my-3 font-medium'>
-                      <span className='text-[#0A1E40]'>Food</span>
-                      <span className='text-primary mx-6'>&bull;</span>
-                      <span className='text-primary'>Ilorin, Kwra</span>
-                    </div>
-
-                    <p className='my-4 text-sm'>lorem lorem ipsum lorem ipsumvv bv v lorem ipsumlorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum vlorem ipsumvipsum </p>
-                    <div className='flex text-primary space-x-6 my-3'>
-                      <BsFacebook />
-                      <BsInstagram />
-                      <BsLinkedin />
-                      <BsTwitter />
-                    </div>
-                    <div className='text-md font-bold underline text-primary my-3'>
-                      www.mcpops.com
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            <Company />
           </div>
 
 
