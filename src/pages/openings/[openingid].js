@@ -9,14 +9,46 @@ import 'swiper/swiper-bundle.min.css';
 import { Navigation, A11y, EffectCube } from 'swiper';
 import Job from '@/components/Job'
 import Applymodalform from '@/components/Applymodalform'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 
 
 const OpeningID = () => {
   const router = useRouter()
   const { openingid } = router.query
+  const [opening, setOpening] = useState([])
 
   const [showModal, setShowModal] = useState(false)
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwtToken');
+
+    const fetchOpening = async () => {
+        try {
+            const res = await fetch(`https://apprenticehubapi.onrender.com/opening/get-opening/${openingid}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${token}`,
+            },
+            });
+
+            if (res.ok) {
+            const data = await res.json();
+            const c = data.data.opening;
+            setOpening(c)
+
+            } else {
+            const errorResponse = await res.json();
+            const errorMessage = errorResponse.message;
+            console.error(errorMessage);
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    };
+    fetchOpening();
+    }, []);
+
 
   return (
     <>
@@ -47,7 +79,7 @@ const OpeningID = () => {
 
           <div className='col-span-3 bg-[#F3F3F3] py-8 px-6 rounded-lg'>
             <div className='flex items-center justify-between'>
-              <div className='text-3xl font-Poppins'>Young auto-mechanic needed</div>
+              <div className='text-3xl font-Poppins'>{opening.headline}</div>
               <div className='flex items-center bg-primary text-white py-2 px-4 rounded-lg'>20 Applications <BsFillPersonFill className='mx-1' /></div>
             </div>
 

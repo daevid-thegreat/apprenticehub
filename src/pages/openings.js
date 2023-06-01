@@ -3,7 +3,7 @@ import Footer from "@/components/Footer"
 import { BsSearch } from "react-icons/bs"
 import CustomSelect from "@/components/Customselect"
 import { IoLocationOutline } from "react-icons/io5"
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Job from "@/components/Job"
 
 
@@ -28,6 +28,40 @@ const openings = () => {
     setIsChecked(event.target.checked);
   }
 
+  const [openings, setOpenings] = useState([])
+  const [zeroOpenings, setZeroOpenings] = useState(false)
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+        const fetchOpenings = async () => {
+            try {
+        const res = await fetch('https://apprenticehubapi.onrender.com/opening/get-openings/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const c = data.data.openings;
+          setOpenings(c)// Extract name and email from the response
+
+        } else if(res.status === 204){
+            setZeroOpenings(true)
+        } else {
+          const errorResponse = await res.json();
+          const errorMessage = errorResponse.message;
+          console.error(errorMessage);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
+       fetchOpenings();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -45,7 +79,7 @@ const openings = () => {
           </div>
         </div>
         <div>
-          <div className="flex justify-center md:grid-cols-3 space-x-8 my-14">
+          <div className="flex justify-center md:grid-cols-3 space-x-8 my-8">
               <div className=" flex border border-1 border-gray rounded-[8px]">
                 <IoLocationOutline width={30} height={30} fill='gray' className="h-10 mx-2" />
                 <input type="text" placeholder="Location" className="border-none bg-white h-10 px-2 text-md focus:outline-none w-11/12" />
@@ -70,18 +104,11 @@ const openings = () => {
       </div>
       <div className="flex justify-center">
         <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-          <Job openingid={'rdctfvygbuhn'} />
-          <Job openingid={'rdctfvfygbuhn'}/>
-          <Job openingid={'rdctfvyhgbuhn'}/>
-          <Job openingid={'rdctfvygbbuhn'}/>
-          <Job openingid={'rdctfvygbduhn'}/>
-          <Job openingid={'rdctfvygbudhsn'}/>
-          <Job openingid={'rdctfvygbuhsn'}/>
-          <Job openingid={'rdctfvygsbuhn'}/>
-          <Job openingid={'rdctfvygbfuhn'}/>
-          <Job openingid={'rdctfvygbushn'}/>
-          <Job openingid={'rdctfvygbuhen'}/>
-          <Job openingid={'rdctfvygbuhnu'}/>
+          {
+            openings.map((opening) => (
+                <Job openingid={opening.id} headline={opening.headline} uid={opening.uid} />
+            ))
+          }
         </div>
       </div>
 

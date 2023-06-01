@@ -4,7 +4,6 @@ import { BsPlus } from 'react-icons/bs';
 const AddRequire = ({ setInputText, todos, setTodos, inputText }) => {
 
     const inputTextHandler = (e) => {
-        console.log(e.target.value);
         setInputText(e.target.value)
     }
     const submitHandler = (e) => {

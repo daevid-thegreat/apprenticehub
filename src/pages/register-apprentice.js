@@ -49,11 +49,7 @@ const register_apprentice = () => {
   return (
     <div className='grid grid-cols-2 md:grid-cols-1'>
       <div className="bg-[url('/auth_image.png')] bg-cover h-screen md:hidden">
-        <div className="logo my-6 mx-4">
-          <Link href="/">
-            <Image src="/logo-1.png" width={385} height={59.52} />
-          </Link>
-        </div>
+        c
         <div className='text-white ml-10 mt-32'>
           <h1 className='text-4xl font-bold'>Sign Up</h1>
           <p className='font-normal text-2xl my-3 leading-tight'>Join us and start your Apprentice dreams</p>
