@@ -1,28 +1,51 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
-function Applymodalform() {
+function Applymodalform(uid) {
+
+  const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age , setAge] = useState("");
+  const [education, setEducation] = useState("");
+  const [tel , setTel] = useState("");
+  const [info, setInfo] = useState("");
+  const [error, setError] = useState("")
 
-  const [selectedOptionE, setSelectedOptionE] = useState("");
-
-  const handleOptionChangeE = (e) => {
-    setSelectedOptionE(e.target.value);
-  };
-
-  const [selectedOptionA, setSelectedOptionA] = useState("");
-
-  const handleOptionChangeA = (e) => {
-    setSelectedOptionA(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(name, email);
-    setIsOpen(false);
+        const token = localStorage.getItem('jwtToken');
+        const res = await fetch(`https://apprenticehubapi.onrender.com/opening/apply-opening/${uid.uid}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${token}`,
+            },
+            body: JSON.stringify({
+                email: email,
+                age: age,
+                education: education,
+                tel: tel,
+                message: info,
+            }),
+            }
+        );
+
+
+        if (res.ok) {
+
+            router.push('/apprentice')
+
+
+        } else {
+            const errorResponse = await res.json();
+            const errorMessage = errorResponse.message;
+
+            setError(errorMessage)
+
+            console.error(errorMessage);
+        }
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -45,43 +68,18 @@ function Applymodalform() {
       {isOpen && (
         <div
           id="modal-overlay"
-          className="fixed top-0 left-0 w-full h-full bg-gray bg-opacity-50 flex items-center justify-center"
+          className="h-screen fixed top-0 left-0 w-screen bg-gray bg-opacity-50 flex items-center justify-center"
           onClick={handleClickOutside}
         >
-          <div className="bg-[#BBC8FF] w-4/12 p-6 rounded-lg ">
+          <div className="bg-[#BBC8FF] w-4/12 p-6 rounded-lg md:w-full md:h-screen ">
             <h2 className="text-2xl font-bold mb-8 text-primary">Apply Here</h2>
-            <form>
-              <div className="flex justify-between">
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 mb-2 text-start  text-secondary font-semibold"
-                    htmlFor="firstname"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    className="border py-3 px-3 text-gray-700 leading-tight border-secondary focus:outline-none focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                  />
+
+            <div className="text-center text-[#EF5D5D] font-semibold text-lg">
+                    {error && <p>{error}</p>}
                 </div>
 
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 mb-2 text-start  text-secondary font-semibold"
-                    htmlFor="lastname"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    className="border py-3 px-3 text-gray-700 leading-tight border-secondary focus:outline-none focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                  />
-                </div>
-              </div>
+
+            <form onSubmit={handleSubmit}>
 
               <div className="mb-4">
                 <label
@@ -95,6 +93,8 @@ function Applymodalform() {
                   id="username"
                   type="text"
                   placeholder="Username"
+                  onChange={(e) => setEmail(e.target.value)}
+
                 />
               </div>
 
@@ -103,8 +103,7 @@ function Applymodalform() {
                   <label htmlFor="education-level" className="block text-gray-700 mb-2 text-start  text-secondary font-semibold">Education</label>
                   <select
                     id="education-level"
-                    value={selectedOptionE}
-                    onChange={handleOptionChangeE}
+                    onChange={(e) => setEducation(e.target.value)}
                     className="border py-3 px-3 text-gray-700 leading-tight border-secondary focus:outline-none focus:shadow-outline"
                   >
                     
@@ -118,8 +117,7 @@ function Applymodalform() {
                   <label htmlFor="age-range" className="block text-gray-700  mb-2 text-start text-secondary font-semibold">Age</label>
                   <select
                     id="age-range"
-                    value={selectedOptionA}
-                    onChange={handleOptionChangeA}
+                    onChange={(e) => setAge(e.target.value)}
                     className="border py-3 px-3 text-gray-700 leading-tight border-secondary focus:outline-none focus:shadow-outline"
                   >
                     <option value="">Select an age range</option>
@@ -146,6 +144,7 @@ function Applymodalform() {
                   id="username"
                   type="text"
                   placeholder="1234567890"
+                    onChange={(e) => setTel(e.target.value)}
                 />
                 </div>
                 
@@ -158,6 +157,7 @@ function Applymodalform() {
                   id="username"
                   type="text"
                   placeholder="Do you have any other things you would like to tell us?"
+                    onChange={(e) => setInfo(e.target.value)}
                 />
               </div>
 

@@ -53,7 +53,7 @@ const profile = () => {
                 <Tabs position="relative" colorScheme="green">
                     <TabList className='space-x-8 text-md font-medium my-2 text-secondary'>
                         <Tab _selected={{ color: '#5271FF' }}>Profile</Tab>
-                        <Tab _selected={{ color: '#5271FF' }}>My Applications</Tab>
+                        {/*<Tab _selected={{ color: '#5271FF' }}>My Applications</Tab>*/}
                         <Tab _selected={{ color: '#5271FF' }}>My Courses</Tab>
                     </TabList>
 
@@ -101,9 +101,9 @@ const profile = () => {
                                 </div>
                             </div>
                         </TabPanel>
-                        <TabPanel>
-                            <p>my applicsconurojv oirkmvitmvmmrtv!</p>
-                        </TabPanel>
+                        {/*<TabPanel>*/}
+                        {/*    <p>my applicsconurojv oirkmvitmvmmrtv!</p>*/}
+                        {/*</TabPanel>*/}
                         <TabPanel>
                             <p>coming soon...</p>
                         </TabPanel>

@@ -1,9 +1,44 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Sidebar from '@/components/Sidebar'
 import Application from '@/components/Application'
 import Link from 'next/link'
 
 const myapplications = () => {
+
+    const [applications, setApplications] = useState([])
+    const [zeroApplications, setZeroApplications] = useState(false)
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+        const fetchApplications = async () => {
+            try {
+        const res = await fetch('https://apprenticehubapi.onrender.com/opening/get-applications/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const c = data.data.applications;
+          setApplications(c)
+
+        } else if(res.status === 204){
+            setZeroApplications(true)
+        } else {
+          const errorResponse = await res.json();
+          const errorMessage = errorResponse.message;
+          console.error(errorMessage);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
+       fetchApplications();
+  }, []);
+
 
   return (
     <div className='flex bg-[#DAE1FF] h-full w-full'>
@@ -16,15 +51,11 @@ const myapplications = () => {
             </Link>
           </div>
          <div className='grid grid-cols-3'>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
-            <Application/>
+             {
+                 applications.map((application) => (
+                    <Application/>
+                    ))
+             }
          </div>
       </main>
     </div>
