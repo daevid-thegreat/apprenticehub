@@ -74,18 +74,18 @@ const OpeningID = () => {
             <div className='bg-primary py-8 px-4 rounded-lg'>
 
 
-              <div className='flex items-center text-center justify-between'>
+              <div className='flex flex-col items-center justify-between space-y-6'>
                 <div className='flex items-center text-center text-white font-semibold text-2xl'>
                    {company.name}
                 </div>
-                <span className='text-secondary bg-white px-4 py-1 font-semibold rounded-2xl'>Food</span></div>
+                <span className='text-secondary bg-white px-4 py-1 font-semibold rounded-2xl'>{company.industry}</span></div>
               <div className='mx-2 text-white font-light my-3'>{company.bio}</div>
-              <div className='flex space-x-4 mx-2 text-white my-8'>
-                <BsFacebook />
-                <BsTwitter />
-                <BsLinkedin />
-                <BsInstagram />
-              </div>
+              {/*<div className='flex space-x-4 mx-2 text-white my-8'>*/}
+              {/*  <BsFacebook />*/}
+              {/*  <BsTwitter />*/}
+              {/*  <BsLinkedin />*/}
+              {/*  <BsInstagram />*/}
+              {/*</div>*/}
               <div>
                 <Link href={`${company.website}`} target={'_blank'} className='underline underline-offset-0 text-white my-2'>{company.website}</Link>
               </div>

@@ -4,12 +4,14 @@ import AppNav from "@/components/AppNav";
 import PasswordModal from "@/components/PasswordModal";
 import EditModal from "@/components/EditModal";
 
-
 const profile = () => {
+
     const [name, setName] = useState("")
     const [master, setMaster] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
+
+
 
     useEffect(() => {
         const fetchUserInfo = async () => {

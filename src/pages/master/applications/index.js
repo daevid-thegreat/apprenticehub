@@ -24,6 +24,7 @@ const myapplications = () => {
           const data = await res.json();
           const c = data.data.applications;
           setApplications(c)
+            console.log(c)
 
         } else if(res.status === 204){
             setZeroApplications(true)
@@ -53,7 +54,7 @@ const myapplications = () => {
          <div className='grid grid-cols-3'>
              {
                  applications.map((application) => (
-                    <Application/>
+                    <Application key={application.id} name={application.user} opening={application.opening.headline} created_at={application.created_at}/>
                     ))
              }
          </div>

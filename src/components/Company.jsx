@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {BsFacebook, BsInstagram, BsLinkedin, BsTwitter} from "react-icons/bs";
 import AddCompanyModal from "@/components/AddCompanyModal";
 import Image from "next/image";
+import EditCompany from "@/components/EditCompany";
 
 const Company = () => {
   const [company_exists, setCompanyExists] = useState(false);
@@ -50,19 +51,16 @@ const Company = () => {
               <div className='flex items-center justify-between'>
                 <span className='text-sm font-bold text-primary'>Company</span>
 
-
-                <button className='bg-[#5271FF] text-white px-4 py-2 rounded-md'>
-                  Edit
-                </button>
+                  <EditCompany/>
               </div>
 
               <div>
                 <div>
                   <div className='flex items-center my-3'>
-                    <div className='border-4 border-primary  rounded-lg'>
-                      <Image src={`https://apprenticehubapi.onrender.com/${company.logo}`} width={100} height={100} />
-                    </div>
-                    <span className='text-xl font-semibold ml-3'>{company.name}</span>
+                    {/*<div className='border-4 border-primary  rounded-lg'>*/}
+                    {/*  <Image src={`https://apprenticehubapi.onrender.com/${company.logo}`} width={100} height={100} />*/}
+                    {/*</div>*/}
+                    <span className='text-3xl font-semibold'>{company.name}</span>
                   </div>
                   <div>
                     <div className='space-x-3 my-3 font-medium'>
@@ -72,13 +70,13 @@ const Company = () => {
                     </div>
 
                     <p className='my-4 text-sm'>{company.description} </p>
-                    <div className='flex text-primary space-x-6 my-3'>
-                      <BsFacebook />
-                      <BsInstagram />
-                      <BsLinkedin />
-                      <BsTwitter />
-                    </div>
-                    <div className='text-md font-bold underline text-primary my-3'>
+                    {/*<div className='flex text-primary space-x-6 my-3'>*/}
+                    {/*  <BsFacebook />*/}
+                    {/*  <BsInstagram />*/}
+                    {/*  <BsLinkedin />*/}
+                    {/*  <BsTwitter />*/}
+                    {/*</div>*/}
+                    <div className='text-md font-bold underline text-primary my-3 underline-primary underline-offset-1'>
                         {company.website}
                     </div>
 

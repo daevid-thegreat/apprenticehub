@@ -92,7 +92,7 @@ function Applymodalform(uid) {
                   className="border py-3 px-3 text-gray-700 leading-tight border-secondary focus:outline-none focus:shadow-outline w-full"
                   id="username"
                   type="text"
-                  placeholder="Username"
+                  placeholder="Your Email"
                   onChange={(e) => setEmail(e.target.value)}
 
                 />

@@ -1,11 +1,13 @@
 import React from 'react'
 import Sidebar from '@/components/Sidebar'
 import { useState, useEffect } from 'react';
-import AddRequire from '@/components/AddRequire';
-import TodoList from '@/components/Requirements';
+import { useRouter } from 'next/router'
+// import AddRequire from '@/components/AddRequire';
+// import TodoList from '@/components/Requirements';
 
 
 const createOpening = () => {
+    const  router = useRouter();
 
     const [headline, setHeadline] = useState("")
     const [description, setDescription] = useState("")
@@ -16,8 +18,8 @@ const createOpening = () => {
 
     const [error, setError] =  useState("")
 
-    const [inputText, setInputText] = useState('');
-    const [todos, setTodos] = useState([]);
+    // const [inputText, setInputText] = useState('');
+    // const [todos, setTodos] = useState([]);
 
 
     const submitHandler = async (e) => {
@@ -35,7 +37,7 @@ const createOpening = () => {
 
         if (res.ok) {
             const data = await res.json();
-            console.log(data)
+            router.push('/master/myopenings')
 
 
         } else {
@@ -50,7 +52,7 @@ const createOpening = () => {
     return (
         <div className='flex bg-[#DAE1FF] h-full w-full'>
             <Sidebar />
-            <main className='px-32 mx-20 w-5/6 my-2 items-center'>
+            <main className='px-32 mx-20 w-5/6 my-2 items-center md:mx-8 md:px-10'>
                 <div className='text-center text-[#1D2234] text-lg font-semibold my-8'>Create A Job Opening</div>
 
                 <div className="text-center text-[#EF5D5D] font-semibold text-lg">
@@ -59,24 +61,31 @@ const createOpening = () => {
 
                 <form onSubmit={submitHandler}>
                     <div className='flex flex-col'>
-                        <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Headline</label>
-                        <input  type="text" name="headline" id="headline" className='py-3 rounded-lg focus:outline-primary' onChange={e =>{setHeadline(e.target.value)}} />
+                        <label htmlFor="headline" className='text-md font-medium text-[#1D2234] my-1'>Headline</label>
+                        <input  type="text" name="headline" id="headline" className='py-3 px-3 rounded-lg focus:outline-primary' onChange={e =>{setHeadline(e.target.value)}} />
                     </div>
 
-                    <div className='grid grid-cols-3 my-4'>
-                        <div className='flex flex-col'>
+                     <div className='flex flex-col my-4 w-full'>
                             <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Pay</label>
-                            <div className='flex items-center'>
+                            <div className='flex items-center w-full'>
                                 <span className='py-3 px-5 bg-white font-semibold rounded-tl-lg rounded-bl-lg border-r border-[#9E9CA0] text-[#00A858]'>₦</span>
-                                <input type="text" name="headline" id="headline" className='py-3 rounded-tr-lg rounded-br-lg focus:outline-primary' onChange={e =>{setPay(e.target.value)}} />
+                                <input type="number" name="headline" id="headline" className='w-96 md:w-60 py-3 px-3 rounded-tr-lg rounded-br-lg focus:outline-primary' onChange={e =>{setPay(e.target.value)}} />
                             </div>
 
                         </div>
 
+                    <div className='flex space-x-6 my-4'>
+
+
                         <div className='flex flex-col'>
                             <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Job-Type</label>
                             <div className='flex items-center'>
-                                <input type="text" name="headline" id="headline" className='py-3 rounded-lg rounded-br-lg focus:outline-primary' onChange={e =>{setJobType(e.target.value)}} />
+                               <select name="job_type" id="job_type" className='w-60 md:w-44 py-3 rounded-lg rounded-br-lg focus:outline-primary px-3' onChange={e =>{setJobType(e.target.value)}}>
+                                      <option value="Full-Time">ApprenticeShip</option>
+                                        <option value="Contract">Contract</option>
+                                        <option value="Internship">Internship</option>
+                                        <option value="Volunteer">Volunteer</option>
+                                </select>
                             </div>
 
                         </div>
@@ -84,7 +93,11 @@ const createOpening = () => {
                         <div className='flex flex-col'>
                             <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Experience Level</label>
                             <div className='flex items-center'>
-                                <input type="text" name="headline" id="headline" className='py-3 rounded-lg rounded-br-lg focus:outline-primary' onChange={e =>{setExperience(e.target.value)}} />
+                                 <select name="level" id="level" className='w-60 md:w-44 py-3 rounded-lg rounded-br-lg focus:outline-primary px-3' onChange={e =>{setExperience(e.target.value)}}>
+                                        <option value="Entry Level">Entry Level</option>
+                                        <option value="Mid Level">Mid Level</option>
+                                        <option value="Senior Level">Senior Level</option>
+                                </select>
                             </div>
 
                         </div>
@@ -98,22 +111,22 @@ const createOpening = () => {
                         </div>
                     </div>
 
-                    <div className='flex flex-col my-4'>
-                        <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Requirements</label>
-                        <div>
-                        <AddRequire
-                          inputText={inputText}
-                          todos={todos}
-                          setTodos={setTodos}
-                          setInputText={setInputText}
-                          {...{setRequirements}}
-                        />
-                        <TodoList setTodos={setTodos} todos={todos} />
+                    {/*<div className='flex flex-col my-4'>*/}
+                    {/*    <label htmlFor="healine" className='text-md font-medium text-[#1D2234] my-1'>Requirements</label>*/}
+                    {/*    <div>*/}
+                    {/*    <AddRequire*/}
+                    {/*      inputText={inputText}*/}
+                    {/*      todos={todos}*/}
+                    {/*      setTodos={setTodos}*/}
+                    {/*      setInputText={setInputText}*/}
+                    {/*      {...{setRequirements}}*/}
+                    {/*    />*/}
+                    {/*    <TodoList setTodos={setTodos} todos={todos} />*/}
 
-                        </div>
-                    </div>
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
-                    <div className='items-center flex justify-center'>
+                    <div className='items-center flex justify-center my-6'>
                         <button className='bg-primary text-white py-3 px-10 rounded-lg'>Post Opening</button>
                     </div>
                 </form>

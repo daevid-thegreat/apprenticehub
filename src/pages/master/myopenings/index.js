@@ -68,16 +68,16 @@ const myopenings = () => {
             <div className='flex bg-[#DAE1FF] h-full w-full'>
                 <Sidebar/>
                 <main className='px-4 w-5/6'>
-                    <div className="my-6 items-center grid grid-cols-7 px-4">
+                    <div className="my-6 items-center grid grid-cols-7 px-4 space-x-4">
                         <input type="text" placeholder="Search"
-                               className="w-full h-14 px-4 text-sm rounded-lg col-span-6 focus:outline-primary"/>
-                        <Link className='bg-[#5271FF] text-white px-4 py-4 rounded-md ml-10 col-span-1'
+                               className="w-full h-14 px-4 text-sm rounded-lg col-span-6 focus:outline-primary md:col-span-5"/>
+                        <Link className='bg-[#5271FF] text-white px-4 py-4 rounded-md col-span-1 md:col-span-2 whitespace-nowrap'
                               href='/master/myopenings/create-opening'>
                             Add New
                         </Link>
                     </div>
 
-                    <div className='grid grid-cols-3'>
+                    <div className='grid grid-cols-3 md:grid-cols-1'>
                         {
                             openings.map((opening) => (
 
