@@ -51,10 +51,10 @@ const myapplications = () => {
               Add New
             </Link>
           </div>
-         <div className='grid grid-cols-3'>
+         <div className='grid grid-cols-3 md:grid-cols-1'>
              {
                  applications.map((application) => (
-                    <Application key={application.id} name={application.user} opening={application.opening.headline} created_at={application.created_at}/>
+                    <Application key={application.id} status={application.status} name={application.user.name} uid={application.uid} headline={application.opening.headline} created_at={application.created_at}/>
                     ))
              }
          </div>
